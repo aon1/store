@@ -1,0 +1,47 @@
+<md-dialog aria-label="New Product">
+  	<form ng-cloak>
+	    <md-toolbar>
+	      	<div class="md-toolbar-tools">
+	        	<h2>New Product</h2>
+	        	<span flex></span>
+	        	<md-button class="md-icon-button" ng-click="cancel()">
+	          		<md-icon class="mdi mdi-close" aria-label="Close dialog"></md-icon>
+	        	</md-button>
+	      	</div>
+	    </md-toolbar>
+
+	    <md-dialog-content>
+	      	<md-input-container>
+	      		<label for="name">Name</label>
+	      		<input type="text" id="name" ng-model="product.name" md-autofocus>
+	      	</md-input-container>
+	      	<md-input-container>
+	      		<label for="description">Description</label>
+	      		<input type="text" id="description" ng-model="product.description">
+	      	</md-input-container>
+	      	<md-input-container>
+      			<label for="price">Price</label>
+      			<input type="text" id="price" ng-model="product.price">
+	      	</md-input-container>
+      		<md-input-container>
+      			<label for="image">Image Link</label>
+      			<input type="text" id="image" ng-model="product.image">
+      		</md-input-container>
+			<md-select ng-model="category">
+				<md-option ng-repeat="category in categories" value="{{ category.category_id }}">
+				{{ category.name }}</md-option>
+			</md-select>
+
+    	</md-dialog-content>
+
+	    <md-dialog-actions layout="row">
+	      	<md-button class="md-warn" ng-click="cancel()">
+	       		Cancel
+	      	</md-button>
+	      	<md-button class="md-primary" ng-click="save(product)">
+		        Save
+	      	</md-button>
+	   	</md-dialog-actions>
+  	</form>
+</md-dialog>
+

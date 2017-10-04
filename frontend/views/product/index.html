@@ -1,0 +1,36 @@
+<md-toolbar>
+    <div class="md-toolbar-tools">
+        <p><strong>Store</strong></p>
+
+        <md-button ng-click="vm.create()">
+            <md-icon class="mdi mdi-plus-circle"></md-icon>
+            New Product
+        </md-button>
+
+        <md-button ng-click="showFilters = true">
+            <md-icon class="mdi mdi-magnify"></md-icon>
+            Filters
+        </md-button>
+    </div>
+</md-toolbar>
+
+<ui-view></ui-view>
+
+<md-content class="md-padding" layout="row" layout-wrap>
+    <md-card ng-repeat="p in vm.products" 
+                    flex="30"
+                    class="classified">
+        <!-- <img ng-src="images/{{ p.image }}" alt=""> -->
+        <md-card-content>
+            <div class="classified-info">
+                <h2 class="md-title">{{ p.name }}</h2>
+                <h2>{{ p.description }}</h2>
+                <h3>{{ p.price | currency }}</h3>
+            </div>
+        </md-card-content>
+        <div layout="row">
+            <md-button ng-click="vm.edit(p)" class="md-primary">Edit</md-button>
+            <md-button ng-click="vm.remove($event, p)" class="md-warn">Delete</md-button>
+        </div>
+    </md-card>
+</md-content>
