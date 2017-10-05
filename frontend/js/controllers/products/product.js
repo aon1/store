@@ -1,6 +1,6 @@
 angular
 	.module('ngStore')
-	.controller('productController', function($scope, $state, productsService, $mdDialog, $mdToast) {
+	.controller('productController', function($scope, $rootScope, $state, productsService, $mdDialog, $mdToast) {
 
     var vm = this;
 
@@ -39,6 +39,7 @@ angular
 
         $mdDialog.show(confirm).then(function() {
             productsService.deleteProduct(product.product_id).then(function(data) {
+                $state.go('products', {}, { reload: true });
                 showToast("Classified deleted");
             });
             

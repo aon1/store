@@ -1,6 +1,6 @@
 angular
 	.module('ngStore')
-	.controller('createProductController', function($scope, $state, productsService) {
+	.controller('createProductController', function($scope, $location, $state, productsService) {
 
     var vm = this;
 
@@ -13,9 +13,10 @@ angular
     });
 
     function create(product) {
+        console.log(product);
         if(product) {
             productsService.saveProduct(product).then(function(data) {
-                $state.go('products');
+                $state.go('products', {}, { reload: true });
             });    
         }
     }

@@ -16,7 +16,7 @@ angular
     function edit(product) {
         if(product) {
             productsService.editProduct(product).then(function(data) {
-                $state.go('products');
+                $state.go('products', {}, { reload: true });
             });    
         }
     }
