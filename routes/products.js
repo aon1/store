@@ -3,7 +3,9 @@ var router = express.Router();
 var connection = require('../config/connection');
 
 router.get('/', function(req, res, next) {
-	connection.query('select * from product', function (err, rows, fields) {
+	connection.query('select p.name, p.description, p.price, p.image, ' + 
+		'p.category_id, c.name as category_name from product p join category c on p.category_id = c.category_id', 
+		function (err, rows, fields) {
 
 		if (err) 
 			throw err

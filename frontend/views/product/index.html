@@ -1,34 +1,58 @@
 <md-toolbar>
+
     <div class="md-toolbar-tools">
         <p><strong>Store</strong></p>
 
         <md-button ng-click="vm.createProductDialog($event)">
-            <md-icon class="mdi mdi-plus-circle"></md-icon>
+            <md-icon class="mdi mdi-plus-circle toolbar-icon"></md-icon>
             New Product
         </md-button>
 
-        <md-button ng-click="showFilters = true">
-            <md-icon class="mdi mdi-magnify"></md-icon>
+        <md-button ng-click="vm.showFilters()">
+            <md-icon class="mdi mdi-magnify toolbar-icon"></md-icon>
             Filters
         </md-button>
     </div>
 </md-toolbar>
 
+<div class="filters" layout-align="center center" layout="row" ng-show="vm.filterDiv">
+    <div id="searchText">
+        <md-input-container>
+            <label >Enter Search Term</label>
+            <input type="text" ng-model="classifiedFilter">
+        </md-input-container>
+    </div>
+
+    <md-input-container>
+        <label>Category</label>
+        <md-select ng-model="categoryFilter">
+            <md-option ng-repeat="category in vm.categories" value="{{ category.category_id }}">{{ category.name }}</md-option>
+        </md-select>
+    </md-input-container>
+    
+    <div layout="row">
+        <md-button class="md-raised md-warn" ng-click="classifiedFilter = ''; categoryFilter = ''">Clear</md-button>
+    </div>
+</div>
+
 <ui-view></ui-view>
 
 <md-content class="md-padding" layout="row" layout-wrap>
-    <md-card ng-repeat="p in vm.products" 
+    <md-card ng-repeat="p in vm.products | 
+                filter: classifiedFilter |
+                filter: categoryFilter" 
                     flex="30"
                     class="classified">
-        <!-- <img ng-src="images/{{ p.image }}" alt=""> -->
+        <img ng-src="images/{{ p.image }}" alt="">
         <md-card-content>
             <div class="classified-info">
-                <h2 class="md-title">{{ p.name }}</h2>
+                <h1 class="md-title">{{ p.name }}</h1>
                 <h2>{{ p.description }}</h2>
                 <h3>{{ p.price | currency }}</h3>
+                <md-chips><md-chip>{{ p.category_name }}</md-chip></md-chips>
             </div>
         </md-card-content>
-        <div layout="row">
+        <div layout="row" layout-align="end" class="editButtons">
             <md-button ng-click="vm.editDialog($event, p)" class="md-primary">Edit</md-button>
             <md-button ng-click="vm.remove($event, p)" class="md-warn">Delete</md-button>
         </div>

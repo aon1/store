@@ -1,17 +1,20 @@
-/*body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
-
-a {
-  color: #00B7FF;
-}
-*/
-
 .dialog {
-	width: 40%;
+	width: 50%;
 }
 
-.dialog-content {
-	padding-top: 50px;
+.md-select {
+	margin-top:-5px;
+}
+
+#searchText {
+    margin-top: 24px;
+}
+
+.toolbar-icon {
+	margin: -15px 0 0 0;
+}
+
+.editButtons {
+	margin-top: -10px;
+	margin-bottom: 10px;
 }

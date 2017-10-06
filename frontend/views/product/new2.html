@@ -15,11 +15,16 @@
 		    
 		      	<md-input-container flex="45">
 		      		<label for="name">Product Name</label>
-		      		<input type="text" id="name" ng-model="product.name" md-autofocus required>
-		      		<div ng-messages="newForm.name.$error" ng-show="newForm.name.$error.required" md-auto-hide="false">
+		      		<input type="text" id="name" ng-model="product.name" 
+		      			md-autofocus ng-required="true" ng-maxlength="100">
+		      		<div ng-messages="newForm.name.$error" ng-show="newForm.name.$error.required" 
+		      			md-auto-hide="false">
   		            	<div ng-message="required">
 		      		    	Product name is required.
 		      		    </div>
+      		            <div ng-message="maxlength">
+      		    			Description maximum length is 100.
+      		    		</div>
 		      		</div> 
 		      	</md-input-container>
 
@@ -27,12 +32,10 @@
 	      			<label for="price">Price</label>
 	      			<input type="number" id="price" ng-model="product.price" 
 	      				ng-pattern="/^\d{0,9}(\.\d{1,9})?$/" required>
-	      			<div ng-messages="newForm.price.$error.pattern">
-  		            	<div ng-message="required">
+	      			<div ng-messages="newForm.price.$error">
+  		            	<div ng-message="pattern">
 		      		    	Invalid Number
 		      		    </div>
-		      		</div> 
-	      			<div ng-messages="newForm.price.$error.required">
   		            	<div ng-message="required">
 		      		    	Price is required.
 		      		    </div>
@@ -43,10 +46,14 @@
 
 	      	<md-input-container class="md-block">
 	      		<label for="description">Description</label>
-	      		<input type="text" id="description" ng-model="product.description" required>
+	      		<input type="text" id="description" 
+	      			ng-model="product.description" ng-maxlength="200" required>
 	      		<div ng-messages="newForm.description.$error">
 		            <div ng-message="required">
 		  		    	Description is required.
+		  		    </div>
+		            <div ng-message="maxlength">
+		  		    	Description maximum length is 200.
 		  		    </div>
 		  		</div>
 	      	</md-input-container>
@@ -61,15 +68,11 @@
 	      		</div>
       		</md-input-container>
 			
-			<md-select ng-model="product.category_id" name="category" placeholder="Select a category" required>
-				<md-option ng-repeat="category in categories" value="{{ category.category_id }}" required>
-				{{ category.name }}</md-option>
+			<md-select ng-model="product.category_id" name="category" placeholder="Select a category" ng-required="true">
+				<md-option ng-repeat="category in categories" value="{{ category.category_id }}">
+					{{ category.name }}
+				</md-option>
 			</md-select>
-			<div ng-messages="newForm.category.$error">
-	            	<div ng-message="required">
-      		    	Category is required.
-      		    </div>
-      		</div>
 
     	</md-dialog-content>
 

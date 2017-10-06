@@ -9,9 +9,11 @@ angular
     vm.remove = remove;
     vm.createProductDialog = createProductDialog;
     vm.editDialog = editDialog;
+    vm.showFilters = showFilters;
     
     vm.products;
     vm.categories;
+    vm.filterDiv = false;
 
     productsService.getProducts().then(function(data) {
         vm.products = data.data;
@@ -77,6 +79,10 @@ angular
         }, function() {
 
         });
+    }
+
+    function showFilters() {
+        vm.filterDiv = vm.filterDiv ? false : true;
     }
 
     function showToast(message) {
