@@ -25,13 +25,6 @@ angular
         $state.go('products.create');
     }
 
-    // function edit(product) {
-    //     $state.go('products.edit', {
-    //         id: product.product_id,
-    //         product: product
-    //     });
-    // }
-
     function editDialog(event, product) {
         $mdDialog.show({
             controller: edit,
@@ -41,13 +34,16 @@ angular
             targetEvent: event,
             clickOutsideToClose: true,
             locals: {
-                product: product
+                product: product,
+                categories: vm.categories
             }
         });
     }
 
     function edit($scope, $mdDialog, locals) {
         $scope.product = locals.product;
+        $scope.categories = locals.categories;
+
         $scope.hide = function() {
             $mdDialog.hide();
         };
@@ -96,11 +92,16 @@ angular
             templateUrl: 'product/new2.html',
             parent: angular.element(document.body),
             targetEvent: event,
-            clickOutsideToClose: true
+            clickOutsideToClose: true,
+            locals: {
+                categories: vm.categories
+            }
         });
     };
 
-    function saveProduct($scope, $mdDialog) {
+    function saveProduct($scope, $mdDialog, locals) {
+        $scope.categories = locals.categories;
+        
         $scope.hide = function() {
             $mdDialog.hide();
         };

@@ -29,7 +29,7 @@
       			<label for="image">Image Link</label>
       			<input type="text" id="image" ng-model="product.image" required>
       		</md-input-container>
-			<md-select ng-model="category">
+			<md-select ng-model="product.category_id" placeholder="Select a category" required>
 				<md-option ng-repeat="category in categories" value="{{ category.category_id }}" required>
 				{{ category.name }}</md-option>
 			</md-select>

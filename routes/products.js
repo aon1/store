@@ -23,8 +23,9 @@ router.get('/:id', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
- 	connection.query('insert into product(name, description, price, image, category_id) values(?, ?, ?, ?, 1)', 
- 		[req.body.name, req.body.description, req.body.price, req.body.image], function (err, rows, fields) {
+ 	connection.query('insert into product(name, description, price, image, category_id) values(?, ?, ?, ?, ?)', 
+ 		[req.body.name, req.body.description, req.body.price, 
+ 			req.body.image, req.body.category_id], function (err, rows, fields) {
 
 		if (err) 
 			throw err
