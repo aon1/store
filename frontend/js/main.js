@@ -1,5 +1,5 @@
 var app = angular
-	.module('ngStore', ['ngMaterial', 'ui.router'])
+	.module('ngStore', ['ngMaterial', 'ui.router', 'ngMessages'])
 	.config(function($stateProvider, $mdThemingProvider) {
 		$mdThemingProvider.theme('docs-dark', 'default')
 			.primaryPalette('yellow')

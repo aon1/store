@@ -15,32 +15,64 @@
 		      	<md-input-container class="md-block">
 		      		<label for="name">Name</label>
 		      		<input type="text" id="name" ng-model="product.name" md-autofocus required>
+		      		<div ng-messages="newForm.name.$error" ng-show="newForm.name.$error.required" md-auto-hide="false">
+  		            	<div ng-message="required">
+		      		    	Product name is required.
+		      		    </div>
+		      		</div> 
 		      	</md-input-container>
 		      	<md-input-container class="md-block">
 	      			<label for="price">Price</label>
-	      			<input type="text" id="price" ng-model="product.price" format="currency" required>
+	      			<input type="text" id="price" ng-model="product.price" 
+	      				ng-pattern="/^\d{0,9}(\.\d{1,9})?$/" required>
+	      			<div ng-messages="newForm.price.$error.pattern">
+  		            	<div ng-message="required">
+		      		    	Invalid Number
+		      		    </div>
+		      		</div> 
+	      			<div ng-messages="newForm.price.$error.required">
+  		            	<div ng-message="required">
+		      		    	Price is required.
+		      		    </div>
+		      		</div>
 		      	</md-input-container>
 	      	</div>
 	      	<md-input-container class="md-block">
 	      		<label for="description">Description</label>
 	      		<input type="text" id="description" ng-model="product.description" required>
+	      		<div ng-messages="newForm.description.$error">
+		            <div ng-message="required">
+		  		    	Description is required.
+		  		    </div>
+		  		</div>
 	      	</md-input-container>
       		<md-input-container class="md-block">
       			<label for="image">Image Link</label>
       			<input type="text" id="image" ng-model="product.image" required>
+      			<div ng-messages="newForm.image.$error">
+		            	<div ng-message="required">
+	      		    	Image link is required.
+	      		    </div>
+	      		</div>
       		</md-input-container>
-			<md-select ng-model="product.category_id">
+			<md-select ng-model="product.category_id" name="category">
 				<md-option ng-repeat="category in categories" value="{{ category.category_id }}" required>
 				{{ category.name }}</md-option>
 			</md-select>
+			<div ng-messages="newForm.category.$error">
+	            	<div ng-message="required">
+      		    	Category is required.
+      		    </div>
+      		</div>
     	</md-dialog-content>
 
 	    <md-dialog-actions layout="row">
-	      	<md-button class="md-warn" ng-click="cancel()">
+	      	<md-button class="md-raised md-warn" ng-click="cancel()">
 	       		Cancel
 	      	</md-button>
-	      	<md-button class="md-primary" ng-click="save(product)">
-		        Save
+	      	<md-button type="submit" class="md-raised md-primary" ng-click="save(product)" 
+	      		ng-disabled="newForm.$invalid">
+		        Edit
 	      	</md-button>
 	   	</md-dialog-actions>
   	</form>

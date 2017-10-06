@@ -23,15 +23,29 @@ router.get('/:id', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
- 	connection.query('insert into product(name, description, price, image, category_id) values(?, ?, ?, ?, ?)', 
- 		[req.body.name, req.body.description, req.body.price, 
- 			req.body.image, req.body.category_id], function (err, rows, fields) {
 
-		if (err) 
-			throw err
-	  
-	  	res.json(rows);
-	});
+	req.checkBody('name', 'Invalid name').notEmpty();
+	req.checkBody('description', 'Invalid description').notEmpty();
+	req.checkBody('price', 'Invalid price').isInt();
+	req.checkBody('image', 'Invalid image').notEmpty();
+	req.checkBody('category_id', 'Invalid name').isInt();
+
+	var errors = req.validationErrors();
+
+	if(!errors) {
+	 	connection.query('insert into product(name, description, price, image, category_id) values(?, ?, ?, ?, ?)', 
+	 		[req.body.name, req.body.description, req.body.price, 
+	 			req.body.image, req.body.category_id], function (err, rows, fields) {
+
+			if (err) 
+				throw err;
+		  
+		  	res.json(rows);
+		});
+	} else {
+		res.status(500).send('Invalid data');
+	}
+
 });
 
 router.delete('/:id', function(req, res, next) {

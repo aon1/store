@@ -101,7 +101,7 @@ angular
 
     function saveProduct($scope, $mdDialog, locals) {
         $scope.categories = locals.categories;
-        
+
         $scope.hide = function() {
             $mdDialog.hide();
         };
@@ -111,8 +111,8 @@ angular
         };
 
         $scope.save = function(product) {
-            $mdDialog.hide(product);
             productsService.saveProduct(product).then(function(data) {
+                $mdDialog.hide(product);
                 $state.go('products', {}, { reload: true });
             });
         };
