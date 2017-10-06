@@ -73,7 +73,7 @@ angular
         $mdDialog.show(confirm).then(function() {
             productsService.deleteProduct(product.product_id).then(function(data) {
                 $state.go('products', {}, { reload: true });
-                showToast("Classified deleted");
+                showToast("Product deleted");
             });
             
         }, function() {
