@@ -3,7 +3,7 @@ var router = express.Router();
 var connection = require('../config/connection');
 
 router.get('/', function(req, res, next) {
-	connection.query('select p.name, p.description, p.price, p.image, ' + 
+	connection.query('select p.product_id, p.name, p.description, p.price, p.image, ' + 
 		'p.category_id, c.name as category_name from product p join category c on p.category_id = c.category_id', 
 		function (err, rows, fields) {
 

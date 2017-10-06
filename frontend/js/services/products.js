@@ -6,10 +6,6 @@ angular
 	        return $http.get('http://localhost:3000/api/products');
 	    }
 
-	    function getCategories() {
-	        return $http.get('http://localhost:3000/api/categories');
-	    }
-
 	    function saveProduct(product) {
 	        return $http.post('http://localhost:3000/api/products', product);
 	    }
@@ -24,7 +20,6 @@ angular
 
 	    return {
 	        getProducts: getProducts,
-	        getCategories: getCategories,
 	        saveProduct: saveProduct,
 	        deleteProduct: deleteProduct,
 	        editProduct: editProduct

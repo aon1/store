@@ -1,9 +1,8 @@
 <md-toolbar>
-
     <div class="md-toolbar-tools">
         <p><strong>Store</strong></p>
 
-        <md-button ng-click="vm.createProductDialog($event)">
+        <md-button ng-click="vm.createDialog($event)">
             <md-icon class="mdi mdi-plus-circle toolbar-icon"></md-icon>
             New Product
         </md-button>
@@ -19,7 +18,7 @@
     <div id="searchText">
         <md-input-container>
             <label >Enter Search Term</label>
-            <input type="text" ng-model="classifiedFilter">
+            <input type="text" ng-model="productsFilter">
         </md-input-container>
     </div>
 
@@ -31,18 +30,19 @@
     </md-input-container>
     
     <div layout="row">
-        <md-button class="md-raised md-warn" ng-click="classifiedFilter = ''; categoryFilter = ''">Clear</md-button>
+        <md-button class="md-raised md-warn" ng-click="productsFilter = ''; categoryFilter = ''">Clear</md-button>
     </div>
 </div>
 
 <ui-view></ui-view>
 
-<md-content class="md-padding" layout="row" layout-wrap>
+
+<md-content class="md-padding" layout="row" layout-align="center none" layout-wrap>
     <md-card ng-repeat="p in vm.products | 
-                filter: classifiedFilter |
+                filter: productsFilter |
                 filter: categoryFilter" 
-                    flex="30"
-                    class="classified">
+                    flex="20"
+                    class="product">
         <img ng-src="images/{{ p.image }}" alt="">
         <md-card-content>
             <div class="classified-info">

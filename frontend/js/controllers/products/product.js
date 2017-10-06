@@ -1,13 +1,13 @@
 angular
 	.module('ngStore')
-	.controller('productController', function($scope, $rootScope, $state, productsService, $mdDialog, $mdToast) {
+	.controller('productController', function($scope, $rootScope, $state, 
+        productsService, categoriesService, $mdDialog, $mdToast) {
 
     var vm = this;
 
-    vm.create = create;
-    vm.edit = edit;
+    vm.editProduct = editProduct;
     vm.remove = remove;
-    vm.createProductDialog = createProductDialog;
+    vm.createDialog = createDialog;
     vm.editDialog = editDialog;
     vm.showFilters = showFilters;
     
@@ -19,19 +19,15 @@ angular
         vm.products = data.data;
     });
 
-    productsService.getCategories().then(function(data) {
+    categoriesService.getCategories().then(function(data) {
         vm.categories = data.data;
     });
 
-    function create(event) {
-        $state.go('products.create');
-    }
-
     function editDialog(event, product) {
         $mdDialog.show({
-            controller: edit,
+            controller: editProduct,
             controllerAs: 'vm',
-            templateUrl: 'product/edit2.html',
+            templateUrl: 'product/edit.html',
             parent: angular.element(document.body),
             targetEvent: event,
             clickOutsideToClose: true,
@@ -42,9 +38,11 @@ angular
         });
     }
 
-    function edit($scope, $mdDialog, locals) {
+    function editProduct($scope, $mdDialog, locals) {
         $scope.product = locals.product;
         $scope.categories = locals.categories;
+
+        console.log($scope.product)
 
         $scope.hide = function() {
             $mdDialog.hide();
@@ -56,7 +54,7 @@ angular
 
         $scope.save = function(product) {
             $mdDialog.hide(product);
-            productsService.editProduct(product).then(function(data) {
+            productsService.editProduct($scope.product).then(function(data) {
                 $state.go('products', {}, { reload: true });
             });    
             
@@ -92,10 +90,10 @@ angular
             .hideDelay(3000));
     }
 
-    function createProductDialog(event) {
+    function createDialog(event) {
         $mdDialog.show({
-            controller: saveProduct,
-            templateUrl: 'product/new2.html',
+            controller: createProduct,
+            templateUrl: 'product/create.html',
             parent: angular.element(document.body),
             targetEvent: event,
             clickOutsideToClose: true,
@@ -105,7 +103,7 @@ angular
         });
     };
 
-    function saveProduct($scope, $mdDialog, locals) {
+    function createProduct($scope, $mdDialog, locals) {
         $scope.categories = locals.categories;
 
         $scope.hide = function() {
