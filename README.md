@@ -33,4 +33,4 @@ $ npm install
 $ npm start
 ```
 
-Go to http://localhost:3000/products or http://localhost:3000/categories
+Go to http://localhost:3000/#!/products or http://localhost:3000/#!/categories
