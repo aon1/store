@@ -2,8 +2,8 @@
   	<form ng-cloak>
 	    <md-toolbar>
 	      	<div class="md-toolbar-tools">
-	        	<h2>New Product</h2>
-	        	<span flex></span>
+	        	<h2>Edit Product</h2>
+	        	<span flex></span> 
 	        	<md-button class="md-icon-button" ng-click="cancel()">
 	          		<md-icon class="mdi mdi-close" aria-label="Close dialog"></md-icon>
 	        	</md-button>
@@ -12,13 +12,13 @@
 
 	    <md-dialog-content layout-padding>
 	    	<div layout="row" class="md-block" layout-align="space-between center">
-		      	<md-input-container flex="45">
+		      	<md-input-container class="md-block">
 		      		<label for="name">Name</label>
 		      		<input type="text" id="name" ng-model="product.name" md-autofocus required>
 		      	</md-input-container>
-		      	<md-input-container flex="45">
+		      	<md-input-container class="md-block">
 	      			<label for="price">Price</label>
-	      			<input type="text" id="price" ng-model="product.price" required>
+	      			<input type="text" id="price" ng-model="product.price" format="currency" required>
 		      	</md-input-container>
 	      	</div>
 	      	<md-input-container class="md-block">

@@ -7,6 +7,8 @@ angular
     vm.create = create;
     vm.edit = edit;
     vm.remove = remove;
+    vm.createProductDialog = createProductDialog;
+    vm.editDialog = editDialog;
     
     vm.products;
     vm.categories;
@@ -19,15 +21,48 @@ angular
         vm.categories = data.data;
     });
 
-    function create() {
+    function create(event) {
         $state.go('products.create');
     }
 
-    function edit(product) {
-        $state.go('products.edit', {
-            id: product.product_id,
-            product: product
+    // function edit(product) {
+    //     $state.go('products.edit', {
+    //         id: product.product_id,
+    //         product: product
+    //     });
+    // }
+
+    function editDialog(event, product) {
+        $mdDialog.show({
+            controller: edit,
+            controllerAs: 'vm',
+            templateUrl: 'product/edit2.html',
+            parent: angular.element(document.body),
+            targetEvent: event,
+            clickOutsideToClose: true,
+            locals: {
+                product: product
+            }
         });
+    }
+
+    function edit($scope, $mdDialog, locals) {
+        $scope.product = locals.product;
+        $scope.hide = function() {
+            $mdDialog.hide();
+        };
+
+        $scope.cancel = function() {
+            $mdDialog.cancel();
+        };
+
+        $scope.save = function(product) {
+            $mdDialog.hide(product);
+            productsService.editProduct(product).then(function(data) {
+                $state.go('products', {}, { reload: true });
+            });    
+            
+        };
     }
 
     function remove(event, product) {
@@ -53,5 +88,32 @@ angular
             .content(message)
             .position('top, right')
             .hideDelay(3000));
+    }
+
+    function createProductDialog(event) {
+        $mdDialog.show({
+            controller: saveProduct,
+            templateUrl: 'product/new2.html',
+            parent: angular.element(document.body),
+            targetEvent: event,
+            clickOutsideToClose: true
+        });
+    };
+
+    function saveProduct($scope, $mdDialog) {
+        $scope.hide = function() {
+            $mdDialog.hide();
+        };
+
+        $scope.cancel = function() {
+            $mdDialog.cancel();
+        };
+
+        $scope.save = function(product) {
+            $mdDialog.hide(product);
+            productsService.saveProduct(product).then(function(data) {
+                $state.go('products', {}, { reload: true });
+            });
+        };
     }
 });

@@ -2,7 +2,7 @@
     <div class="md-toolbar-tools">
         <p><strong>Store</strong></p>
 
-        <md-button ng-click="vm.create()">
+        <md-button ng-click="vm.createProductDialog($event)">
             <md-icon class="mdi mdi-plus-circle"></md-icon>
             New Product
         </md-button>
@@ -29,7 +29,7 @@
             </div>
         </md-card-content>
         <div layout="row">
-            <md-button ng-click="vm.edit(p)" class="md-primary">Edit</md-button>
+            <md-button ng-click="vm.editDialog($event, p)" class="md-primary">Edit</md-button>
             <md-button ng-click="vm.remove($event, p)" class="md-warn">Delete</md-button>
         </div>
     </md-card>
