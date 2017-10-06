@@ -21,7 +21,6 @@ $ npm install
 ### Configuration ###
 
 - Edit database user and password on backend/config/connection.js file
-- Create a database called store
 - There is a dump file containing database structure and some dummy data
 - Execute
     ```sh
