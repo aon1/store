@@ -28,7 +28,7 @@ router.post('/', function(req, res, next) {
 
 	req.checkBody('name', 'Invalid name').notEmpty();
 	req.checkBody('description', 'Invalid description').notEmpty();
-	req.checkBody('price', 'Invalid price').isInt();
+	req.checkBody('price', 'Invalid price').isFloat();
 	req.checkBody('image', 'Invalid image').notEmpty();
 	req.checkBody('category_id', 'Invalid name').isInt();
 
