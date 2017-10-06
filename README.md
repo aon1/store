@@ -24,7 +24,7 @@ $ npm install
 - There is a dump file containing database structure and some dummy data
 - Execute
     ```sh
-    $ mysql -u <user> -p < dump.sql
+    $ mysql -u <user> -p < data/dump.sql
     ```
     
 ### Running ###
