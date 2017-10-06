@@ -23,8 +23,29 @@ router.get('/:id', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
- 	connection.query('insert into category(name) values(?)', 
- 		[req.body.name], function (err, rows, fields) {
+
+	req.checkBody('name', 'Invalid name').notEmpty();
+
+	var errors = req.validationErrors();
+
+	if(!errors) {
+	 	connection.query('insert into category(name) values(?)', 
+	 		[req.body.name], function (err, rows, fields) {
+
+			if (err) 
+				throw err
+		  
+		  	res.json(rows);
+		});
+	 } else {
+	 	res.status(500).send('Invalid data');
+	 }
+});
+
+router.patch('/:id', function(req, res, next) {
+ 	connection.query('update category set name = ? ' +
+ 		'where category_id = ?', 
+ 		[req.body.name, req.params.id], function (err, rows, fields) {
 
 		if (err) 
 			throw err
@@ -32,5 +53,6 @@ router.post('/', function(req, res, next) {
 	  	res.json(rows);
 	});
 });
+
 
 module.exports = router;

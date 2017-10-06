@@ -9,7 +9,7 @@
 
         <md-button ng-click="vm.showFilters()">
             <md-icon class="mdi mdi-magnify toolbar-icon"></md-icon>
-            Filters
+            Search
         </md-button>
     </div>
 </md-toolbar>
@@ -45,7 +45,7 @@
                     class="product">
         <img ng-src="images/{{ p.image }}" alt="">
         <md-card-content>
-            <div class="classified-info">
+            <div class="product-info">
                 <h1 class="md-title">{{ p.name }}</h1>
                 <h2>{{ p.description }}</h2>
                 <h3>{{ p.price | currency }}</h3>

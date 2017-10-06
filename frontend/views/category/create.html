@@ -1,0 +1,45 @@
+<md-dialog aria-label="New Product" class="dialog">
+  	<form name="newForm" novalidate ng-cloak>
+	    <md-toolbar>
+	      	<div class="md-toolbar-tools">
+	        	<h2>New Category</h2>
+	        	<span flex></span>
+	        	<md-button class="md-icon-button" ng-click="cancel()">
+	          		<md-icon class="mdi mdi-close" aria-label="Close dialog"></md-icon>
+	        	</md-button>
+	      	</div>
+	    </md-toolbar>
+
+	    <md-dialog-content layout-padding>
+	    	<div layout="row" class="md-block" layout-align="space-between center">
+		    
+		      	<md-input-container flex="45">
+		      		<label for="name">Category Name</label>
+		      		<input type="text" id="name" ng-model="product.name" 
+		      			md-autofocus ng-required="true" ng-maxlength="100">
+		      		<div ng-messages="newForm.name.$error" ng-show="newForm.name.$error.required" 
+		      			md-auto-hide="false">
+  		            	<div ng-message="required">
+		      		    	Product name is required.
+		      		    </div>
+      		            <div ng-message="maxlength">
+      		    			Description maximum length is 100.
+      		    		</div>
+		      		</div> 
+		      	</md-input-container>
+	      	
+	      	</div>
+
+    	</md-dialog-content>
+
+	    <md-dialog-actions layout="row">
+	      	<md-button class="md-raised md-warn" ng-click="cancel()">
+	       		Cancel
+	      	</md-button>
+	      	<md-button type="submit" class="md-raised md-primary" ng-click="save(product)" ng-disabled="newForm.$invalid">
+		        Save
+	      	</md-button>
+	   	</md-dialog-actions>
+  	</form>
+</md-dialog>
+

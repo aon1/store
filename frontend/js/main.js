@@ -6,7 +6,13 @@ var app = angular
 			      url: '/products',
 			      templateUrl: 'product/index.html',
 			      controller: 'productController as vm'
-			});
+			})
+			.state('categories', {
+			      url: '/categories',
+			      templateUrl: 'category/index.html',
+			      controller: 'categoryController as vm'
+			})
+			;
 	});
 
 

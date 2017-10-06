@@ -7,11 +7,16 @@ angular
 	    }
 
 	    function saveCategory(category) {
-	        return $http.post('http://localhost:3000/api/categories', category);
+	        return $http.post('http://localhost:3000/api/categories/' + category.category_id, category);
+	    }
+
+	    function editCategory(category) {
+	        return $http.patch('http://localhost:3000/api/categories/' + category.category_id, category);
 	    }
 
 	    return {
 	        getCategories: getCategories,
-	        saveCategory: saveCategory
+	        saveCategory: saveCategory,
+	        editCategory: editCategory
 	    };
 	});

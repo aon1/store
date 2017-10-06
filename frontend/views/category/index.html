@@ -1,0 +1,46 @@
+<md-toolbar>
+    <div class="md-toolbar-tools">
+        <p><strong>Store</strong></p>
+
+        <md-button ng-click="vm.createDialog($event)">
+            <md-icon class="mdi mdi-plus-circle toolbar-icon"></md-icon>
+            New Category
+        </md-button>
+
+        <md-button ng-click="vm.showFilters()">
+            <md-icon class="mdi mdi-magnify toolbar-icon"></md-icon>
+            Search
+        </md-button>
+    </div>
+</md-toolbar>
+
+<div class="filters" layout-align="center center" layout="row" ng-show="vm.filterDiv">
+    <div id="searchText">
+        <md-input-container>
+            <label >Enter Search Term</label>
+            <input type="text" ng-model="categoryFilter">
+        </md-input-container>
+    </div>
+    
+    <div layout="row">
+        <md-button class="md-raised md-warn" ng-click="categoryFilter = ''">Clear</md-button>
+    </div>
+</div>
+
+<ui-view></ui-view>
+
+<md-content class="md-padding" layout="row" layout-align="center none" layout-wrap>
+    <md-card ng-repeat="c in vm.categories | 
+                filter: categoryFilter" 
+                    flex="20"
+                    class="category">
+        <md-card-content>
+            <div class="category-info">
+                <h1 class="md-title">{{ c.name }}</h1>
+            </div>
+        </md-card-content>
+        <div layout="row" layout-align="end" class="editButtons">
+            <md-button ng-click="vm.editDialog($event, c)" class="md-primary">Edit</md-button>
+        </div>
+    </md-card>
+</md-content>

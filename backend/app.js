@@ -56,7 +56,7 @@ app.use(function(req, res, next) {
 });
 
 app.get('*', function(req, res) {
-	res.sendfile('./frontend/index.html'); // load the single view file (angular will handle the page changes on the front-end)
+	res.sendfile('./frontend/index.html'); 
 });
 
 module.exports = app;
