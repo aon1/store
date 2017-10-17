@@ -22,11 +22,14 @@
     "express-validator": "^4.2.1",
     "gulp-live-server": "0.0.31",
     "gulp-nodemon": "^2.2.1",
+    "gulp-prompt": "^0.4.1",
+    "gulp-shell": "^0.6.3",
     "jade": "~1.11.0",
     "mdi": "^2.0.46",
     "morgan": "~1.9.0",
     "mysql": "^2.15.0",
-    "serve-favicon": "~2.4.5"
+    "serve-favicon": "~2.4.5",
+    "util": "^0.10.3"
   },
   "devDependencies": {
     "cors": "^2.8.4",
