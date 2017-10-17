@@ -8,6 +8,9 @@ var gulp = require('gulp'),
 var gls = require('gulp-live-server');
 var inject = require('gulp-inject');
 var del = require('del');
+var util = require('util');
+var shell = require('gulp-shell');
+var prompt = require('gulp-prompt');
 
 var jsDir = [
         './frontend/js/main.js',
@@ -87,6 +90,31 @@ gulp.task('watch', function () {
     gulp.watch(['./**/*.html'], ['html']);
     gulp.watch([cssDir], ['css']);
     gulp.watch([jsDir], ['js'])
+});
+
+gulp.task('db', function() {
+    gulp.src('').pipe(
+        prompt.prompt([{
+            type: 'input',
+            name: 'username',
+            message: 'Please enter your mysql username'
+        }, {
+            type: 'password',
+            name: 'password',
+            message: 'Please enter your mysql password'
+        }], function(response) {
+            var shellCommand;
+            if (response.password == '') {
+                shellCommand = util.format('mysql -u %s < data/dump.sql', response.username)
+            } else {
+                shellCommand = util.format('mysql -u %s -p%s < data/dump.sql', response.username, response.password);
+            }
+
+            gulp.src('').pipe(shell([shellCommand]));
+
+            console.log('\n\x1b[32m%s\x1b[0m', 'Database created!');
+
+        }));
 });
 
 gulp.task('clean', function () {
