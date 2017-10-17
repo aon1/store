@@ -1,6 +1,7 @@
 angular
 	.module('ngStore')
-	.controller('categoryController', function($scope, $rootScope, $state, 
+	.controller('categoryController', ['$scope', '$rootScope', '$state', 
+        'categoriesService', '$mdDialog', '$mdToast', function($scope, $rootScope, $state, 
         categoriesService, $mdDialog, $mdToast) {
 
     var vm = this;
@@ -81,4 +82,4 @@ angular
             
         };
     }
-});
+}]);

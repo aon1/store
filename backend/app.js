@@ -9,6 +9,8 @@ var expressValidator = require('express-validator');
 var products = require('./routes/products');
 var categories = require('./routes/categories');
 
+var cors = require('cors')
+
 var app = express();
 
 // view engine setup
@@ -23,9 +25,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(expressValidator()); 
 
-app.use(express.static(path.join(__dirname, '../frontend')));
-app.use(express.static(path.join(__dirname, '../frontend/views')));
-app.use(express.static(path.join(__dirname, '../node_modules')));
+app.use(express.static(path.join(__dirname, '../dist')));
 
 app.use('/api/products', products);
 app.use('/api/categories', categories);
@@ -48,6 +48,8 @@ app.use(function(err, req, res, next) {
 	res.render('error');
 });
 
+app.use(cors())
+
 app.use(function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'DELETE, PUT', 'GET', 'POST');
@@ -56,7 +58,7 @@ app.use(function(req, res, next) {
 });
 
 app.get('*', function(req, res) {
-	res.sendfile('./frontend/index.html'); 
+	res.sendfile('./dist/index.html'); 
 });
 
 module.exports = app;

@@ -19,7 +19,10 @@ var app = angular
 			      controller: 'categoryController as vm'
 			});
 			
-	});
+	})
+	.config(['$qProvider', function ($qProvider) {
+    	$qProvider.errorOnUnhandledRejections(false);
+    }]);
 
 
 
