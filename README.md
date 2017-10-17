@@ -26,11 +26,19 @@ $ npm install
     ```sh
     $ mysql -u <user> -p < data/dump.sql
     ```
+
+You also can use gulp to restore dump
+
+- Execute
+	```sh
+    $ gulp db
+    ```	
+- Your user and password will be prompted
     
 ### Running ###
 
 ```sh
-$ npm start
+$ gulp
 ```
 
 Go to http://localhost:3000/#!/products or http://localhost:3000/#!/categories
