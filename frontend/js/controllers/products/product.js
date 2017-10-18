@@ -43,8 +43,6 @@ angular
         $scope.product = locals.product;
         $scope.categories = locals.categories;
 
-        console.log($scope.product)
-
         $scope.hide = function() {
             $mdDialog.hide();
         };

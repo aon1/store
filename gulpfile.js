@@ -11,6 +11,9 @@ var del = require('del');
 var util = require('util');
 var shell = require('gulp-shell');
 var prompt = require('gulp-prompt');
+var open = require('gulp-open');
+var wait = require('gulp-wait');
+var gutil = require('gulp-util');
 
 var jsDir = [
         './frontend/js/main.js',
@@ -33,13 +36,6 @@ var jsDir = [
     targetJsDir = './dist/js',
     targetCssDir = './dist/css',
     targetFontsDir = './dist/fonts';
-
-gulp.task('angular_templates', function () {
-    gulp.src('./frontend/views/**/*.html')
-        .pipe(templateCache({module:'cahsowan'}))
-        .pipe(gulp.dest(targetJsDir))
-        .pipe(connect.reload());
-});
 
 gulp.task('jsvendor', function() {
     gulp.src(vendorDir)
@@ -70,14 +66,6 @@ gulp.task('fonts', function() {
     gulp.src('./frontend/fonts/*')
         .pipe(gulp.dest(targetFontsDir))
         .pipe(connect.reload());
-});
-
-gulp.task('connect', function() {
-    connect.server({
-        root: './dist',
-        // livereload: true,
-        port: 3001
-    });
 });
 
 gulp.task('html', function () {
@@ -117,11 +105,24 @@ gulp.task('db', function() {
         }));
 });
 
+gulp.task('open', function(){
+    var options = {
+        uri: 'http://localhost:3000',
+        app: 'google-chrome'
+    };
+
+    gutil.log('Opening browser');
+
+    gulp.src(__filename)
+    	.pipe(wait(1500))
+        .pipe(open(options));
+});
+
 gulp.task('clean', function () {
 	return del(['dist']);
 });
 
-gulp.task('default', ['css', 'js', 'jsvendor', 'fonts', 'html', 'watch'], function() {
+gulp.task('default', ['open', 'css', 'js', 'jsvendor', 'fonts', 'html', 'watch'], function() {
 	var server = gls.new('./backend/bin/www');
 	return server.start();
 });
